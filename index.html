@@ -1,0 +1,4085 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<meta name="theme-color" content="#1a0f1e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Luna">
+
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+
+<title>Luna · ปฏิทินรอบเดือน</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Prompt:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#1a0f1e;
+    --bg2:#26162b;
+    --card:#2d1c33;
+    --card2:#322039;
+
+    --line:#49344f;
+
+    --gold:#d8b77a;
+    --gold2:#c39a55;
+
+    --rose:#e8a0a8;
+    --rose2:#d98591;
+
+    --ivory:#f5ebe0;
+    --mute:#a693a8;
+
+    --fert:#8fb9a8;
+
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Prompt',system-ui,sans-serif;
+}
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    margin:0;
+    min-height:100%;
+    background:var(--bg);
+    color:var(--ivory);
+    font-family:var(--sans);
+    font-weight:300;
+}
+
+body{
+    padding:env(safe-area-inset-top) 0 0;
+
+    background:
+        radial-gradient(
+            120% 55% at 50% -10%,
+            #3b2244 0,
+            var(--bg) 62%
+        ) fixed;
+}
+
+button,
+input,
+textarea{
+    font:inherit;
+}
+
+button{
+    color:inherit;
+    cursor:pointer;
+    border:0;
+    background:none;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:2px;
+}
+
+.hide{
+    display:none!important;
+}
+
+/* =========================================================
+   LOCK SCREEN
+========================================================= */
+
+#lock{
+    position:fixed;
+    inset:0;
+    z-index:50;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        radial-gradient(
+            100% 50% at 50% 0%,
+            #38203f 0,
+            var(--bg) 65%
+        );
+
+    padding:24px;
+    text-align:center;
+}
+
+#lock h1{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:46px;
+    margin:0;
+
+    color:var(--gold);
+
+    letter-spacing:.05em;
+}
+
+#lock p{
+    color:var(--mute);
+    margin:6px 0 26px;
+    min-height:24px;
+}
+
+.dots{
+    display:flex;
+    gap:16px;
+    margin-bottom:30px;
+}
+
+.dots i{
+    width:14px;
+    height:14px;
+
+    border-radius:50%;
+
+    border:1.5px solid var(--gold);
+}
+
+.dots i.on{
+    background:var(--gold);
+}
+
+.pad{
+    display:grid;
+    grid-template-columns:repeat(3,72px);
+    gap:16px;
+}
+
+.pad button{
+    height:72px;
+
+    border-radius:50%;
+
+    border:1px solid var(--line);
+
+    font-family:var(--serif);
+    font-size:30px;
+
+    background:var(--bg2);
+
+    transition:
+        background .15s,
+        transform .15s;
+}
+
+.pad button:active{
+    background:var(--gold);
+    color:var(--bg);
+    transform:scale(.94);
+}
+
+.shake{
+    animation:sh .35s;
+}
+
+@keyframes sh{
+    25%{
+        transform:translateX(-10px);
+    }
+
+    75%{
+        transform:translateX(10px);
+    }
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main{
+    width:100%;
+    max-width:520px;
+
+    margin:0 auto;
+
+    padding:
+        18px
+        18px
+        calc(96px + env(safe-area-inset-bottom));
+}
+
+
+/* =========================================================
+   CLOCK
+========================================================= */
+
+.clock{
+    text-align:center;
+    padding:8px 0 4px;
+}
+
+.time{
+    font-family:'Bodoni Moda',var(--serif);
+
+    font-size:54px;
+    font-weight:500;
+
+    line-height:1.1;
+
+    letter-spacing:.03em;
+
+    font-variant-numeric:
+        lining-nums
+        tabular-nums;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8e9c8,
+            #d8b77a 70%,
+            #b98f4d
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.time small{
+    font-size:21px;
+    margin-left:6px;
+    letter-spacing:.02em;
+}
+
+.date{
+    font-family:'Bodoni Moda','Prompt',sans-serif;
+
+    color:var(--mute);
+
+    margin-top:8px;
+
+    font-size:14px;
+
+    letter-spacing:.04em;
+}
+
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+h2{
+    font-family:var(--serif);
+
+    font-weight:500;
+
+    font-size:24px;
+
+    margin:22px 0 11px;
+
+    color:var(--gold);
+}
+
+h3{
+    font-family:var(--serif);
+
+    font-weight:500;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.025),
+            rgba(255,255,255,0)
+        ),
+        var(--card);
+
+    border:1px solid var(--line);
+
+    border-radius:20px;
+
+    padding:17px;
+
+    margin-bottom:13px;
+}
+
+
+/* =========================================================
+   CYCLE RING
+========================================================= */
+
+.ring{
+    position:relative;
+
+    width:204px;
+    height:204px;
+
+    margin:13px auto;
+}
+
+.ring svg{
+    width:100%;
+    height:100%;
+
+    transform:rotate(-90deg);
+}
+
+.ring .c{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+}
+
+.ring b{
+    font-family:'Bodoni Moda',var(--serif);
+
+    font-size:52px;
+
+    font-weight:500;
+
+    line-height:1.1;
+
+    font-variant-numeric:
+        lining-nums;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8e9c8,
+            #d8b77a 70%,
+            #b98f4d
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.ring span{
+    font-size:12px;
+
+    color:var(--mute);
+
+    margin-top:5px;
+
+    padding:0 30px;
+
+    text-align:center;
+}
+
+
+/* =========================================================
+   SMALL STATS
+========================================================= */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:9px;
+}
+
+.stat{
+    background:var(--bg2);
+
+    border-radius:14px;
+
+    padding:11px 12px;
+}
+
+.stat span{
+    font-size:11px;
+
+    color:var(--mute);
+
+    display:block;
+
+    margin-bottom:3px;
+}
+
+.stat b{
+    font-weight:400;
+
+    font-size:14px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+    width:100%;
+
+    padding:13px;
+
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e6c98d,
+            #c39a55
+        );
+
+    color:#2a1a2e;
+
+    font-weight:500;
+
+    margin-top:10px;
+
+    transition:
+        transform .15s,
+        opacity .15s;
+}
+
+.btn:active{
+    transform:scale(.985);
+    opacity:.9;
+}
+
+.btn.ghost{
+    background:none;
+
+    border:1px solid var(--line);
+
+    color:var(--ivory);
+}
+
+.btn.danger{
+    background:none;
+
+    border:1px solid #824d59;
+
+    color:var(--rose);
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.lbl{
+    font-size:12px;
+
+    color:var(--mute);
+
+    margin:14px 0 8px;
+}
+
+.chips{
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:7px;
+}
+
+.chip{
+    padding:7px 12px;
+
+    border-radius:99px;
+
+    border:1px solid var(--line);
+
+    font-size:13px;
+
+    background:var(--bg2);
+
+    transition:.15s;
+}
+
+.chip.on{
+    background:var(--rose);
+
+    color:#2a1a2e;
+
+    border-color:var(--rose);
+}
+
+.pain{
+    display:grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    gap:5px;
+}
+
+.pain button{
+    padding:9px 0;
+
+    border-radius:11px;
+
+    border:1px solid var(--line);
+
+    background:var(--bg2);
+
+    font-size:12px;
+}
+
+.pain button.on{
+    background:var(--gold);
+
+    color:#2a1a2e;
+
+    border-color:var(--gold);
+}
+
+textarea,
+input[type=number],
+input[type=text],
+input[type=password]{
+    width:100%;
+
+    background:var(--bg2);
+
+    border:1px solid var(--line);
+
+    border-radius:11px;
+
+    padding:11px;
+
+    color:var(--ivory);
+
+    font:inherit;
+}
+
+textarea{
+    min-height:70px;
+
+    resize:vertical;
+}
+
+
+/* =========================================================
+   CALENDAR
+========================================================= */
+
+.mh{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin:6px 0 12px;
+}
+
+.mh strong{
+    font-family:var(--sans);
+
+    font-size:23px;
+
+    font-weight:400;
+}
+
+.mh .yr{
+    font-family:'Bodoni Moda',var(--serif);
+
+    font-weight:500;
+
+    font-size:22px;
+
+    letter-spacing:.04em;
+
+    margin-left:6px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8e9c8,
+            #d8b77a 70%,
+            #b98f4d
+        );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    color:transparent;
+}
+
+.mh button{
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    border:1px solid var(--line);
+
+    font-size:18px;
+}
+
+.grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(7,1fr);
+
+    gap:4px;
+}
+
+.dow{
+    text-align:center;
+
+    font-size:11px;
+
+    color:var(--mute);
+
+    padding-bottom:4px;
+}
+
+.day{
+    aspect-ratio:1;
+
+    border-radius:13px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:14px;
+
+    position:relative;
+
+    background:var(--bg2);
+}
+
+.day.out{
+    visibility:hidden;
+}
+
+.day.per{
+    background:var(--rose);
+
+    color:#2a1a2e;
+
+    font-weight:500;
+}
+
+.day.pred{
+    border:1.5px dashed var(--rose);
+}
+
+.day.fert{
+    background:
+        rgba(143,185,168,.25);
+
+    border:1px solid var(--fert);
+}
+
+.day.ovu{
+    background:var(--fert);
+
+    color:#12281f;
+}
+
+.day.today{
+    box-shadow:
+        0 0 0 2px var(--gold);
+}
+
+.day.has::after{
+    content:"";
+
+    position:absolute;
+
+    bottom:5px;
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:var(--gold);
+}
+
+.day.per.has::after{
+    background:#2a1a2e;
+}
+
+.legend{
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    font-size:11px;
+
+    color:var(--mute);
+
+    margin-top:13px;
+}
+
+.legend i{
+    display:inline-block;
+
+    width:10px;
+    height:10px;
+
+    border-radius:4px;
+
+    margin-right:4px;
+
+    vertical-align:-1px;
+}
+
+
+/* =========================================================
+   ================== STATISTICS ============================
+========================================================= */
+
+/*
+    จุดสำคัญ:
+    หน้า Stats ถูกลดขนาด typography ลง
+    เพื่อให้ดูคล้ายแอปสุขภาพจริง
+*/
+
+#v-stat > h2{
+    font-family:var(--sans);
+
+    font-size:21px;
+
+    font-weight:400;
+
+    letter-spacing:-.01em;
+
+    margin:
+        7px
+        0
+        15px;
+
+    color:var(--ivory);
+}
+
+
+/* ----- statistics tiles ----- */
+
+.tiles{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:8px;
+
+    margin-bottom:18px;
+}
+
+.tile{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.025),
+            rgba(255,255,255,0)
+        ),
+        var(--card);
+
+    border:1px solid var(--line);
+
+    border-radius:16px;
+
+    padding:13px 13px 12px;
+
+    min-height:84px;
+}
+
+.tile span{
+    font-size:10px;
+
+    color:var(--mute);
+
+    display:block;
+
+    line-height:1.4;
+
+    margin-bottom:3px;
+}
+
+.num{
+    font-family:'Bodoni Moda',var(--serif);
+
+    font-size:27px;
+
+    font-weight:500;
+
+    font-variant-numeric:
+        lining-nums;
+
+    color:var(--gold);
+
+    line-height:1.2;
+}
+
+.num small{
+    font-family:var(--sans);
+
+    font-size:11px;
+
+    color:var(--mute);
+
+    margin-left:3px;
+
+    font-weight:300;
+}
+
+
+/* ----- section titles in stats ----- */
+
+#v-stat h2:not(:first-child){
+    font-family:var(--sans);
+
+    font-size:17px;
+
+    font-weight:400;
+
+    color:var(--ivory);
+
+    margin:
+        23px
+        0
+        10px;
+
+    letter-spacing:-.01em;
+}
+
+
+/* ----- insight cards ----- */
+
+.ins{
+    border-radius:14px;
+
+    padding:12px 13px;
+
+    margin-bottom:8px;
+
+    background:var(--card);
+
+    border:1px solid var(--line);
+
+    border-left:
+        3px solid var(--fert);
+
+    font-size:12px;
+
+    line-height:1.6;
+}
+
+.ins.w{
+    border-left-color:var(--rose);
+}
+
+.ins.i{
+    border-left-color:var(--gold);
+}
+
+.ins strong{
+    display:block;
+
+    font-weight:400;
+
+    font-size:13px;
+
+    margin-bottom:2px;
+
+    color:var(--ivory);
+}
+
+
+/* ----- chart cards ----- */
+
+#v-stat .card{
+    border-radius:16px;
+
+    padding:14px;
+
+    margin-bottom:9px;
+}
+
+.h3{
+    font-size:11px;
+
+    color:var(--mute);
+
+    margin:
+        0
+        0
+        11px;
+
+    font-weight:300;
+}
+
+
+/* ----- cycle bars ----- */
+
+.bars{
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:6px;
+
+    height:125px;
+}
+
+.bc{
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:3px;
+
+    height:100%;
+
+    font-size:10px;
+}
+
+.bc i{
+    width:100%;
+
+    max-width:30px;
+
+    background:var(--gold);
+
+    border-radius:
+        7px
+        7px
+        3px
+        3px;
+
+    display:block;
+}
+
+.bc i.x{
+    background:var(--rose);
+}
+
+.bc i.n{
+    background:var(--line);
+}
+
+.bc b{
+    font-weight:400;
+
+    font-family:'Bodoni Moda',serif;
+
+    font-variant-numeric:
+        lining-nums;
+
+    font-size:11px;
+}
+
+.bc em{
+    font-style:normal;
+
+    font-size:9px;
+
+    color:var(--mute);
+
+    font-family:'Bodoni Moda',serif;
+
+    font-variant-numeric:
+        lining-nums;
+}
+
+
+/* ----- symptom frequency ----- */
+
+.fr{
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-size:12px;
+
+    margin:7px 0;
+}
+
+.fr span{
+    width:78px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.fr i{
+    flex:1;
+
+    height:6px;
+
+    background:var(--bg2);
+
+    border-radius:9px;
+
+    overflow:hidden;
+}
+
+.fr u{
+    display:block;
+
+    height:100%;
+
+    background:var(--rose);
+
+    border-radius:9px;
+
+    text-decoration:none;
+}
+
+.fr b{
+    width:22px;
+
+    text-align:right;
+
+    font-weight:400;
+
+    color:var(--mute);
+
+    font-size:11px;
+}
+
+
+/* ----- explanatory text ----- */
+
+.mut{
+    color:var(--mute);
+
+    font-size:11px;
+
+    line-height:1.65;
+}
+
+
+/* =========================================================
+   SHEET
+========================================================= */
+
+#sheet{
+    position:fixed;
+
+    inset:0;
+
+    z-index:30;
+
+    background:
+        rgba(10,4,12,.65);
+
+    display:flex;
+
+    align-items:flex-end;
+}
+
+.sheet{
+    background:var(--bg);
+
+    width:100%;
+
+    max-width:520px;
+
+    margin:0 auto;
+
+    border-radius:
+        25px
+        25px
+        0
+        0;
+
+    padding:
+        19px
+        18px
+        calc(24px + env(safe-area-inset-bottom));
+
+    max-height:90%;
+
+    overflow:auto;
+
+    border:1px solid var(--line);
+
+    animation:up .25s ease-out;
+}
+
+@keyframes up{
+    from{
+        transform:translateY(40px);
+        opacity:0;
+    }
+}
+
+.sheet h3{
+    font-family:var(--serif);
+
+    font-size:27px;
+
+    font-weight:500;
+
+    margin:
+        0
+        0
+        4px;
+
+    color:var(--gold);
+}
+
+
+/* =========================================================
+   BOTTOM NAV
+========================================================= */
+
+nav{
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    z-index:20;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:5px;
+
+    padding:
+        9px
+        12px
+        calc(9px + env(safe-area-inset-bottom));
+
+    background:
+        rgba(26,15,30,.93);
+
+    backdrop-filter:blur(14px);
+
+    border-top:
+        1px solid var(--line);
+}
+
+nav button{
+    flex:1;
+
+    max-width:160px;
+
+    padding:8px 0;
+
+    border-radius:13px;
+
+    color:var(--mute);
+
+    font-size:11px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:2px;
+}
+
+nav button svg{
+    width:21px;
+    height:21px;
+
+    stroke:currentColor;
+
+    fill:none;
+
+    stroke-width:1.5;
+}
+
+nav button.on{
+    color:var(--gold);
+
+    background:var(--bg2);
+}
+
+
+/* =========================================================
+   MISC
+========================================================= */
+
+.row{
+    display:flex;
+
+    gap:10px;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:12px;
+}
+
+.row>*{
+    flex:1;
+}
+
+.row label{
+    flex:1.4;
+
+    font-size:13px;
+}
+
+.toast{
+    position:fixed;
+
+    left:50%;
+    bottom:100px;
+
+    transform:translateX(-50%);
+
+    background:var(--gold);
+
+    color:#2a1a2e;
+
+    padding:9px 18px;
+
+    border-radius:99px;
+
+    z-index:60;
+
+    font-size:12px;
+
+    white-space:nowrap;
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.25);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:380px){
+
+    main{
+        padding-left:14px;
+        padding-right:14px;
+    }
+
+    .time{
+        font-size:48px;
+    }
+
+    .ring{
+        width:190px;
+        height:190px;
+    }
+
+    .ring b{
+        font-size:48px;
+    }
+
+    .tile{
+        padding:11px;
+    }
+
+    .num{
+        font-size:25px;
+    }
+
+    .tile span{
+        font-size:9px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *{
+        animation:none!important;
+        transition:none!important;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     LOCK
+======================================================= -->
+
+<div id="lock">
+
+    <h1>Luna</h1>
+
+    <p id="lockMsg"></p>
+
+    <div class="dots" id="dots"></div>
+
+    <div class="pad" id="pad"></div>
+
+</div>
+
+
+<!-- =======================================================
+     APP
+======================================================= -->
+
+<main id="app" class="hide">
+
+
+    <!-- HOME -->
+
+    <section id="v-home">
+
+        <div class="clock">
+
+            <div class="time" id="clk"></div>
+
+            <div class="date" id="dt"></div>
+
+        </div>
+
+
+        <div class="card" id="cyc"></div>
+
+
+        <h2>วันนี้เป็นอย่างไรบ้าง</h2>
+
+        <div class="card" id="todayLog"></div>
+
+    </section>
+
+
+
+    <!-- CALENDAR -->
+
+    <section id="v-cal" class="hide">
+
+        <div class="mh">
+
+            <button id="pm" aria-label="เดือนก่อน">
+                ‹
+            </button>
+
+            <strong id="mt"></strong>
+
+            <button id="nm" aria-label="เดือนถัดไป">
+                ›
+            </button>
+
+        </div>
+
+
+        <div class="grid" id="gr"></div>
+
+
+        <div class="legend">
+
+            <span>
+                <i style="background:var(--rose)"></i>
+                มีประจำเดือน
+            </span>
+
+            <span>
+                <i style="border:1.5px dashed var(--rose)"></i>
+                คาดการณ์
+            </span>
+
+            <span>
+                <i style="background:rgba(143,185,168,.4)"></i>
+                ช่วงเจริญพันธุ์
+            </span>
+
+            <span>
+                <i style="background:var(--fert)"></i>
+                ไข่ตก
+            </span>
+
+            <span>
+                <i style="background:var(--gold);border-radius:50%"></i>
+                มีบันทึก
+            </span>
+
+        </div>
+
+
+        <p style="
+            color:var(--mute);
+            font-size:12px;
+        ">
+            แตะที่วันเพื่อบันทึกอาการหรือประจำเดือน
+        </p>
+
+    </section>
+
+
+
+    <!-- STATISTICS -->
+
+    <section id="v-stat" class="hide">
+
+        <h2>สถิติและสุขภาพ</h2>
+
+        <div id="statBody"></div>
+
+    </section>
+
+
+
+    <!-- SETTINGS -->
+
+    <section id="v-set" class="hide">
+
+        <h2>ตั้งค่า</h2>
+
+
+        <div class="card">
+
+            <div
+                class="lbl"
+                style="margin-top:0"
+            >
+                รหัส PIN
+            </div>
+
+
+            <button
+                class="btn ghost"
+                id="chPin"
+                style="margin-top:0"
+            >
+                เปลี่ยนรหัส PIN
+            </button>
+
+
+            <button
+                class="btn ghost"
+                id="lockNow"
+            >
+                ล็อกแอปตอนนี้
+            </button>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div
+                class="lbl"
+                style="margin-top:0"
+            >
+                ข้อมูลของคุณ
+                <br>
+                <span style="font-size:11px">
+                    เก็บไว้ในเครื่องนี้เท่านั้น
+                </span>
+            </div>
+
+
+            <button
+                class="btn ghost"
+                id="exp"
+                style="margin-top:0"
+            >
+                สำรองข้อมูลเป็นไฟล์
+            </button>
+
+
+            <button
+                class="btn ghost"
+                id="impB"
+            >
+                นำเข้าข้อมูลจากไฟล์
+            </button>
+
+
+            <input
+                type="file"
+                id="imp"
+                accept=".json"
+                class="hide"
+            >
+
+
+            <button
+                class="btn danger"
+                id="wipe"
+            >
+                ลบข้อมูลทั้งหมด
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- =======================================================
+     NAV
+======================================================= -->
+
+<nav id="nav" class="hide">
+
+    <button
+        data-v="home"
+        class="on"
+    >
+
+        <svg viewBox="0 0 24 24">
+            <path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>
+        </svg>
+
+        หน้าหลัก
+
+    </button>
+
+
+    <button data-v="cal">
+
+        <svg viewBox="0 0 24 24">
+
+            <rect
+                x="3"
+                y="5"
+                width="18"
+                height="16"
+                rx="3"
+            />
+
+            <path d="M8 3v4M16 3v4M3 10h18"/>
+
+        </svg>
+
+        ปฏิทิน
+
+    </button>
+
+
+    <button data-v="stat">
+
+        <svg viewBox="0 0 24 24">
+
+            <path d="M5 20V11M12 20V4M19 20v-6"/>
+
+        </svg>
+
+        สถิติ
+
+    </button>
+
+
+    <button data-v="set">
+
+        <svg viewBox="0 0 24 24">
+
+            <circle
+                cx="12"
+                cy="12"
+                r="3"
+            />
+
+            <path d="
+                M12 2v3
+                M12 19v3
+                M2 12h3
+                M19 12h3
+                M5 5l2 2
+                M17 17l2 2
+                M5 19l2-2
+                M17 7l2-2
+            "/>
+
+        </svg>
+
+        ตั้งค่า
+
+    </button>
+
+</nav>
+
+
+
+<div id="sheet" class="hide">
+
+    <div
+        class="sheet"
+        id="sheetBody"
+    ></div>
+
+</div>
+
+
+
+<script>
+
+'use strict';
+
+
+/* =======================================================
+   DATA
+======================================================= */
+
+const KEY='luna.v1';
+
+const MOODS=[
+    'สดใส',
+    'เศร้า',
+    'หงุดหงิด',
+    'วิตกกังวล',
+    'อ่อนไหว',
+    'เหนื่อยล้า',
+    'โมโหง่าย',
+    'นิ่งสงบ'
+];
+
+const SYMS=[
+    'ปวดหลัง',
+    'ปวดหัว',
+    'เต้านมคัด',
+    'ท้องอืด',
+    'คลื่นไส้',
+    'สิว',
+    'อยากอาหาร',
+    'นอนไม่หลับ'
+];
+
+const PAIN=[
+    'ไม่ปวด',
+    'เล็กน้อย',
+    'ปานกลาง',
+    'มาก',
+    'รุนแรง'
+];
+
+const TH_M=[
+    'มกราคม',
+    'กุมภาพันธ์',
+    'มีนาคม',
+    'เมษายน',
+    'พฤษภาคม',
+    'มิถุนายน',
+    'กรกฎาคม',
+    'สิงหาคม',
+    'กันยายน',
+    'ตุลาคม',
+    'พฤศจิกายน',
+    'ธันวาคม'
+];
+
+const TH_D=[
+    'อาทิตย์',
+    'จันทร์',
+    'อังคาร',
+    'พุธ',
+    'พฤหัสบดี',
+    'ศุกร์',
+    'เสาร์'
+];
+
+
+const $=s=>document.querySelector(s);
+
+
+let S={
+    pw:null,
+    cycle:28,
+    period:5,
+    starts:[],
+    logs:{}
+};
+
+
+try{
+
+    Object.assign(
+        S,
+        JSON.parse(
+            localStorage.getItem(KEY)||'{}'
+        )
+    );
+
+}catch(e){}
+
+
+const save=()=>{
+
+    try{
+
+        localStorage.setItem(
+            KEY,
+            JSON.stringify(S)
+        );
+
+    }catch(e){
+
+        toast('บันทึกไม่สำเร็จ');
+
+    }
+
+};
+
+
+if(
+    navigator.storage &&
+    navigator.storage.persist
+){
+
+    navigator.storage.persist();
+
+}
+
+
+/* =======================================================
+   DATE
+======================================================= */
+
+const pad=n=>
+    String(n).padStart(2,'0');
+
+
+const ymd=d=>
+    d.getFullYear()+
+    '-' +
+    pad(d.getMonth()+1)+
+    '-' +
+    pad(d.getDate());
+
+
+const parse=s=>{
+
+    const [
+        a,
+        b,
+        c
+    ]=s.split('-').map(Number);
+
+    return new Date(
+        a,
+        b-1,
+        c
+    );
+
+};
+
+
+const add=(s,n)=>{
+
+    const d=parse(s);
+
+    d.setDate(
+        d.getDate()+n
+    );
+
+    return ymd(d);
+
+};
+
+
+const diff=(a,b)=>
+    Math.round(
+        (
+            parse(a)-
+            parse(b)
+        )/864e5
+    );
+
+
+const today=()=>
+    ymd(new Date());
+
+
+const fmt=s=>{
+
+    const d=parse(s);
+
+    return (
+        d.getDate()+
+        ' '+
+        TH_M[d.getMonth()]+
+        ' '+
+        (d.getFullYear()+543)
+    );
+
+};
+
+
+function toast(t){
+
+    const e=
+        document.createElement('div');
+
+    e.className='toast';
+
+    e.textContent=t;
+
+    document.body.appendChild(e);
+
+    setTimeout(
+        ()=>e.remove(),
+        1800
+    );
+
+}
+
+
+/* =======================================================
+   CYCLE
+======================================================= */
+
+const starts=()=>
+    [...S.starts].sort();
+
+
+function info(d){
+
+    const st=starts();
+
+    let per=false;
+    let pred=false;
+    let fert=false;
+    let ovu=false;
+
+
+    for(const s of st){
+
+        const n=diff(d,s);
+
+        if(
+            n>=0 &&
+            n<S.period
+        ){
+
+            per=true;
+
+        }
+
+    }
+
+
+    if(st.length){
+
+        const last=
+            st[st.length-1];
+
+
+        for(let k=1;k<=3;k++){
+
+            const ns=
+                add(
+                    last,
+                    S.cycle*k
+                );
+
+            const n=
+                diff(d,ns);
+
+
+            if(
+                n>=0 &&
+                n<S.period &&
+                !per
+            ){
+
+                pred=true;
+
+            }
+
+
+            const ov=
+                diff(
+                    add(ns,-14),
+                    d
+                );
+
+
+            if(ov===0){
+                ovu=true;
+            }
+
+
+            if(
+                ov>=-1 &&
+                ov<=5
+            ){
+
+                fert=true;
+
+            }
+
+        }
+
+
+        const ov0=
+            add(
+                last,
+                S.cycle-14
+            );
+
+
+        if(
+            diff(ov0,d)===0
+        ){
+
+            ovu=true;
+
+        }
+
+    }
+
+
+    return{
+        per,
+        pred,
+        fert:fert&&!per,
+        ovu
+    };
+
+}
+
+
+const hasLog=d=>{
+
+    const l=S.logs[d];
+
+    return (
+        l &&
+        (
+            l.pain>0 ||
+            (
+                l.moods &&
+                l.moods.length
+            ) ||
+            (
+                l.syms &&
+                l.syms.length
+            ) ||
+            l.note
+        )
+    );
+
+};
+
+
+/* =======================================================
+   PIN
+======================================================= */
+
+let buf='';
+let mode='enter';
+let first='';
+
+
+async function hash(p){
+
+    const s='luna|'+p;
+
+    try{
+
+        const b=
+            await crypto.subtle.digest(
+                'SHA-256',
+                new TextEncoder().encode(s)
+            );
+
+        return [
+            ...new Uint8Array(b)
+        ]
+        .map(
+            x=>
+                x
+                .toString(16)
+                .padStart(2,'0')
+        )
+        .join('');
+
+    }catch(e){
+
+        let h=5381;
+
+        for(
+            const c of s
+        ){
+
+            h=
+                (
+                    (h<<5)+
+                    h+
+                    c.charCodeAt(0)
+                )|0;
+
+        }
+
+        return 'x'+h;
+
+    }
+
+}
+
+
+function drawPad(){
+
+    const p=$('#pad');
+
+    p.innerHTML='';
+
+
+    [
+        1,2,3,
+        4,5,6,
+        7,8,9,
+        '',
+        0,
+        '⌫'
+    ]
+    .forEach(k=>{
+
+        const b=
+            document.createElement('button');
+
+        b.textContent=k;
+
+        if(k===''){
+
+            b.style.visibility='hidden';
+
+        }
+
+        b.onclick=()=>key(k);
+
+        p.appendChild(b);
+
+    });
+
+
+    drawDots();
+
+}
+
+
+function drawDots(){
+
+    $('#dots').innerHTML=
+        [0,1,2,3]
+        .map(
+            i=>
+                `<i class="${
+                    i<buf.length
+                    ?'on'
+                    :''
+                }"></i>`
+        )
+        .join('');
+
+}
+
+
+function msg(t){
+
+    $('#lockMsg').textContent=t;
+
+}
+
+
+function startLock(m){
+
+    buf='';
+    first='';
+
+    mode=
+        m ||
+        (
+            S.pw
+            ?'enter'
+            :'set'
+        );
+
+
+    $('#lock')
+        .classList
+        .remove('hide');
+
+    $('#app')
+        .classList
+        .add('hide');
+
+    $('#nav')
+        .classList
+        .add('hide');
+
+
+    msg(
+        mode==='enter'
+        ?'ใส่รหัส PIN 4 หลัก'
+        :mode==='set'
+        ?'ตั้งรหัส PIN 4 หลักของคุณ'
+        :mode==='new'
+        ?'ตั้งรหัส PIN ใหม่'
+        :''
+    );
+
+
+    drawPad();
+
+}
+
+
+async function key(k){
+
+    if(k==='⌫'){
+
+        buf=
+            buf.slice(0,-1);
+
+    }else if(
+        buf.length<4
+    ){
+
+        buf+=k;
+
+    }
+
+
+    drawDots();
+
+
+    if(
+        buf.length<4
+    ) return;
+
+
+    const h=
+        await hash(buf);
+
+
+    if(mode==='enter'){
+
+        if(
+            h===S.pw
+        ){
+
+            unlock();
+
+        }else{
+
+            $('#dots')
+                .classList
+                .add('shake');
+
+            msg(
+                'รหัสไม่ถูกต้อง ลองอีกครั้ง'
+            );
+
+
+            setTimeout(()=>{
+
+                $('#dots')
+                    .classList
+                    .remove('shake');
+
+                buf='';
+
+                drawDots();
+
+            },400);
+
+        }
+
+    }else if(
+        mode==='set' ||
+        mode==='new'
+    ){
+
+        first=h;
+
+        buf='';
+
+        mode=
+            mode+'2';
+
+        msg(
+            'ยืนยันรหัส PIN อีกครั้ง'
+        );
+
+        drawDots();
+
+    }else{
+
+        if(
+            h===first
+        ){
+
+            S.pw=h;
+
+            save();
+
+            unlock();
+
+            toast(
+                'ตั้งรหัสเรียบร้อย'
+            );
+
+        }else{
+
+            msg(
+                'รหัสไม่ตรงกัน เริ่มใหม่อีกครั้ง'
+            );
+
+            setTimeout(
+                ()=>startLock(
+                    mode.startsWith('new')
+                    ?'new'
+                    :'set'
+                ),
+                700
+            );
+
+        }
+
+    }
+
+}
+
+
+function unlock(){
+
+    $('#lock')
+        .classList
+        .add('hide');
+
+    $('#app')
+        .classList
+        .remove('hide');
+
+    $('#nav')
+        .classList
+        .remove('hide');
+
+    buf='';
+
+    render();
+
+}
+
+
+/* =======================================================
+   CLOCK
+======================================================= */
+
+function tick(){
+
+    const n=new Date();
+
+
+    $('#clk').innerHTML=
+        pad(n.getHours())+
+        ':'+
+        pad(n.getMinutes())+
+        '<small>'+
+        pad(n.getSeconds())+
+        '</small>';
+
+
+    $('#dt').textContent=
+        'วัน'+
+        TH_D[n.getDay()]+
+        'ที่ '+
+        fmt(today());
+
+}
+
+
+setInterval(
+    tick,
+    1000
+);
+
+tick();
+
+
+/* =======================================================
+   LOG FORM
+======================================================= */
+
+function logForm(d,host){
+
+    const l=
+        S.logs[d]=
+        S.logs[d]||
+        {
+            pain:0,
+            moods:[],
+            syms:[],
+            note:''
+        };
+
+
+    const chips=(
+        arr,
+        key
+    )=>
+        arr
+        .map(
+            x=>
+                `<button
+                    class="chip ${
+                        l[key].includes(x)
+                        ?'on'
+                        :''
+                    }"
+                    data-k="${key}"
+                    data-v="${x}"
+                >
+                    ${x}
+                </button>`
+        )
+        .join('');
+
+
+    host.innerHTML=`
+
+        <div
+            class="lbl"
+            style="margin-top:0"
+        >
+            ระดับอาการปวดท้อง
+        </div>
+
+        <div class="pain">
+
+            ${
+                PAIN
+                .map(
+                    (p,i)=>
+                        `<button
+                            class="${
+                                l.pain===i
+                                ?'on'
+                                :''
+                            }"
+                            data-p="${i}"
+                        >
+                            ${p}
+                        </button>`
+                )
+                .join('')
+            }
+
+        </div>
+
+
+        <div class="lbl">
+            อารมณ์
+        </div>
+
+        <div class="chips">
+            ${chips(MOODS,'moods')}
+        </div>
+
+
+        <div class="lbl">
+            อาการอื่น ๆ
+        </div>
+
+        <div class="chips">
+            ${chips(SYMS,'syms')}
+        </div>
+
+
+        <div class="lbl">
+            บันทึกเพิ่มเติม
+        </div>
+
+        <textarea
+            placeholder="เขียนอะไรก็ได้..."
+        >${l.note||''}</textarea>
+
+    `;
+
+
+    host.onclick=e=>{
+
+        const b=
+            e.target.closest('button');
+
+        if(!b)return;
+
+
+        if(
+            b.dataset.p!==undefined
+        ){
+
+            l.pain=
+                +b.dataset.p;
+
+        }else if(
+            b.dataset.k
+        ){
+
+            const a=
+                l[b.dataset.k];
+
+            const i=
+                a.indexOf(
+                    b.dataset.v
+                );
+
+
+            if(i<0){
+
+                a.push(
+                    b.dataset.v
+                );
+
+            }else{
+
+                a.splice(i,1);
+
+            }
+
+        }else{
+
+            return;
+
+        }
+
+
+        save();
+
+        const t=
+            host
+            .querySelector('textarea')
+            .value;
+
+        l.note=t;
+
+        logForm(
+            d,
+            host
+        );
+
+    };
+
+
+    host
+        .querySelector('textarea')
+        .oninput=e=>{
+
+            l.note=
+                e.target.value;
+
+            save();
+
+        };
+
+}
+
+
+/* =======================================================
+   HOME
+======================================================= */
+
+function renderHome(){
+
+    const st=starts();
+
+    const t=today();
+
+    let big='–';
+
+    let sub=
+        'แตะปุ่มด้านล่างเพื่อเริ่มบันทึกรอบแรก';
+
+    let pct=0;
+
+    let nextTxt=
+        'ยังไม่มีข้อมูล';
+
+    let ovTxt=
+        'ยังไม่มีข้อมูล';
+
+
+    if(st.length){
+
+        const last=
+            st[st.length-1];
+
+        const day=
+            diff(t,last)+1;
+
+
+        let ns=
+            add(
+                last,
+                S.cycle
+            );
+
+
+        while(
+            diff(ns,t)<0
+        ){
+
+            ns=
+                add(
+                    ns,
+                    S.cycle
+                );
+
+        }
+
+
+        const left=
+            diff(ns,t);
+
+
+        if(
+            day>=1 &&
+            day<=S.period
+        ){
+
+            big=day;
+
+            sub=
+                'วันที่มีประจำเดือน';
+
+        }else{
+
+            big=left;
+
+            sub=
+                left===0
+                ?'คาดว่าจะมาวันนี้'
+                :'วันก่อนประจำเดือนรอบหน้า';
+
+        }
+
+
+        pct=
+            Math.min(
+                1,
+                Math.max(
+                    0,
+                    day/S.cycle
+                )
+            );
+
+
+        nextTxt=
+            fmt(ns);
+
+        ovTxt=
+            fmt(
+                add(
+                    ns,
+                    -14
+                )
+            );
+
+    }
+
+
+    const R=92;
+
+    const C=
+        2*Math.PI*R;
+
+    const onP=
+        info(t).per;
+
+
+    $('#cyc').innerHTML=`
+
+        <div class="ring">
+
+            <svg
+                viewBox="0 0 210 210"
+            >
+
+                <circle
+                    cx="105"
+                    cy="105"
+                    r="${R}"
+                    fill="none"
+                    stroke="#4a3450"
+                    stroke-width="8"
+                />
+
+                <circle
+                    cx="105"
+                    cy="105"
+                    r="${R}"
+                    fill="none"
+                    stroke="${
+                        onP
+                        ?'#e8a0a8'
+                        :'#d8b77a'
+                    }"
+                    stroke-width="8"
+                    stroke-linecap="round"
+                    stroke-dasharray="${C}"
+                    stroke-dashoffset="${
+                        C*(1-pct)
+                    }"
+                />
+
+            </svg>
+
+
+            <div class="c">
+
+                <b>${big}</b>
+
+                <span>
+                    ${sub}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <span>
+                    ประจำเดือนรอบหน้า
+                </span>
+
+                <b>
+                    ${nextTxt}
+                </b>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>
+                    คาดว่าไข่ตก
+                </span>
+
+                <b>
+                    ${ovTxt}
+                </b>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="btn"
+            id="tog"
+        >
+            ${
+                onP
+                ?'ประจำเดือนหมดแล้ววันนี้'
+                :'เริ่มมีประจำเดือนวันนี้'
+            }
+        </button>
+
+    `;
+
+
+    $('#tog').onclick=()=>{
+
+        if(onP){
+
+            const last=
+                st[st.length-1];
+
+            S.period=
+                Math.max(
+                    1,
+                    diff(t,last)+1
+                );
+
+        }else if(
+            !S.starts.includes(t)
+        ){
+
+            S.starts.push(t);
+
+        }
+
+
+        save();
+
+        render();
+
+        toast('บันทึกแล้ว');
+
+    };
+
+
+    logForm(
+        t,
+        $('#todayLog')
+    );
+
+}
+
+
+/* =======================================================
+   CALENDAR
+======================================================= */
+
+let cm=new Date();
+
+cm.setDate(1);
+
+
+function renderCal(){
+
+    $('#mt').innerHTML=
+        TH_M[cm.getMonth()]+
+        '<span class="yr">'+
+        (cm.getFullYear()+543)+
+        '</span>';
+
+
+    const g=$('#gr');
+
+    g.innerHTML=
+        TH_D
+        .map(
+            d=>
+                `<div class="dow">
+                    ${d.slice(0,2)}
+                </div>`
+        )
+        .join('');
+
+
+    const first=
+        cm.getDay();
+
+    const n=
+        new Date(
+            cm.getFullYear(),
+            cm.getMonth()+1,
+            0
+        ).getDate();
+
+
+    const t=today();
+
+
+    for(
+        let i=0;
+        i<first;
+        i++
+    ){
+
+        g.insertAdjacentHTML(
+            'beforeend',
+            '<div class="day out"></div>'
+        );
+
+    }
+
+
+    for(
+        let d=1;
+        d<=n;
+        d++
+    ){
+
+        const s=
+            cm.getFullYear()+
+            '-' +
+            pad(cm.getMonth()+1)+
+            '-' +
+            pad(d);
+
+
+        const i=info(s);
+
+
+        const c=[
+            'day',
+            i.per&&'per',
+            i.pred&&'pred',
+            i.fert&&'fert',
+            i.ovu&&'ovu',
+            s===t&&'today',
+            hasLog(s)&&'has'
+        ]
+        .filter(Boolean)
+        .join(' ');
+
+
+        g.insertAdjacentHTML(
+            'beforeend',
+            `<button
+                class="${c}"
+                data-d="${s}"
+            >
+                ${d}
+            </button>`
+        );
+
+    }
+
+}
+
+
+$('#gr').onclick=e=>{
+
+    const b=
+        e.target.closest(
+            '[data-d]'
+        );
+
+    if(b){
+
+        openDay(
+            b.dataset.d
+        );
+
+    }
+
+};
+
+
+$('#pm').onclick=()=>{
+
+    cm.setMonth(
+        cm.getMonth()-1
+    );
+
+    renderCal();
+
+};
+
+
+$('#nm').onclick=()=>{
+
+    cm.setMonth(
+        cm.getMonth()+1
+    );
+
+    renderCal();
+
+};
+
+
+function openDay(d){
+
+    const sh=
+        $('#sheetBody');
+
+    const isS=
+        S.starts.includes(d);
+
+
+    sh.innerHTML=`
+
+        <h3>
+            ${fmt(d)}
+        </h3>
+
+
+        <button
+            class="btn ${
+                isS
+                ?'danger'
+                :''
+            }"
+            id="sS"
+        >
+            ${
+                isS
+                ?'ยกเลิกวันเริ่มประจำเดือนนี้'
+                :'ตั้งเป็นวันเริ่มประจำเดือน'
+            }
+        </button>
+
+
+        <div
+            id="lf"
+            style="margin-top:6px"
+        ></div>
+
+
+        <button
+            class="btn ghost"
+            id="cl"
+        >
+            ปิด
+        </button>
+
+    `;
+
+
+    logForm(
+        d,
+        $('#lf')
+    );
+
+
+    $('#sheet')
+        .classList
+        .remove('hide');
+
+
+    $('#sS').onclick=()=>{
+
+        if(isS){
+
+            S.starts.splice(
+                S.starts.indexOf(d),
+                1
+            );
+
+        }else{
+
+            S.starts.push(d);
+
+        }
+
+
+        save();
+
+        close();
+
+        render();
+
+    };
+
+
+    $('#cl').onclick=close;
+
+}
+
+
+function close(){
+
+    $('#sheet')
+        .classList
+        .add('hide');
+
+    render();
+
+}
+
+
+$('#sheet').onclick=e=>{
+
+    if(
+        e.target.id==='sheet'
+    ){
+
+        close();
+
+    }
+
+};
+
+
+/* =======================================================
+   SETTINGS
+======================================================= */
+
+function renderSet(){}
+
+
+$('#chPin').onclick=()=>
+    startLock('new');
+
+
+$('#lockNow').onclick=()=>
+    startLock('enter');
+
+
+$('#exp').onclick=()=>{
+
+    const a=
+        document.createElement('a');
+
+
+    a.href=
+        URL.createObjectURL(
+            new Blob(
+                [
+                    JSON.stringify(
+                        {
+                            ...S,
+                            pw:undefined
+                        },
+                        null,
+                        1
+                    )
+                ],
+                {
+                    type:
+                        'application/json'
+                }
+            )
+        );
+
+
+    a.download=
+        'luna-backup-'+
+        today()+
+        '.json';
+
+
+    a.click();
+
+};
+
+
+$('#impB').onclick=()=>
+    $('#imp').click();
+
+
+$('#imp').onchange=e=>{
+
+    const f=
+        e.target.files[0];
+
+    if(!f)return;
+
+
+    const r=
+        new FileReader();
+
+
+    r.onload=()=>{
+
+        try{
+
+            const d=
+                JSON.parse(
+                    r.result
+                );
+
+
+            S.cycle=
+                d.cycle||
+                S.cycle;
+
+            S.period=
+                d.period||
+                S.period;
+
+            S.starts=
+                d.starts||
+                [];
+
+            S.logs=
+                d.logs||
+                {};
+
+
+            save();
+
+            render();
+
+            toast(
+                'นำเข้าข้อมูลแล้ว'
+            );
+
+        }catch(x){
+
+            toast(
+                'ไฟล์ไม่ถูกต้อง'
+            );
+
+        }
+
+    };
+
+
+    r.readAsText(f);
+
+};
+
+
+$('#wipe').onclick=()=>{
+
+    if(
+        confirm(
+            'ลบข้อมูลทั้งหมดและรหัส PIN? การลบไม่สามารถย้อนกลับได้'
+        )
+    ){
+
+        localStorage.removeItem(
+            KEY
+        );
+
+        location.reload();
+
+    }
+
+};
+
+
+/* =======================================================
+   STATISTICS
+======================================================= */
+
+function renderStat(){
+
+    const st=starts();
+
+    const t=today();
+
+    const el=
+        $('#statBody');
+
+
+    const sum=a=>
+        a.reduce(
+            (x,y)=>x+y,
+            0
+        );
+
+
+    const avg=a=>
+        a.length
+        ?sum(a)/a.length
+        :0;
+
+
+    const cl=[];
+
+
+    for(
+        let i=1;
+        i<st.length;
+        i++
+    ){
+
+        cl.push(
+            diff(
+                st[i],
+                st[i-1]
+            )
+        );
+
+    }
+
+
+    const A=avg(cl);
+
+    const mn=
+        cl.length
+        ?Math.min(...cl)
+        :0;
+
+    const mx=
+        cl.length
+        ?Math.max(...cl)
+        :0;
+
+    const rng=
+        mx-mn;
+
+
+    const logs=
+        Object.keys(S.logs)
+        .filter(d=>hasLog(d))
+        .sort();
+
+
+    const perL=
+        logs.filter(
+            d=>info(d).per
+        );
+
+
+    const offL=
+        logs.filter(
+            d=>!info(d).per
+        );
+
+
+    const pa=a=>
+        a.length
+        ?avg(
+            a.map(
+                d=>S.logs[d].pain
+            )
+        )
+        :0;
+
+
+    /* -----------------------------------------------------
+       INSIGHTS
+    ----------------------------------------------------- */
+
+    const ins=[];
+
+
+    if(st.length<3){
+
+        ins.push([
+            'i',
+            'ข้อมูลยังน้อย',
+            'บันทึกวันเริ่มประจำเดือนอย่างน้อย 3 รอบ เพื่อให้เห็นแนวโน้มของรอบเดือนได้ชัดเจนขึ้น'
+        ]);
+
+    }
+
+
+    if(cl.length){
+
+        if(A<21){
+
+            ins.push([
+                'w',
+                'รอบเดือนค่อนข้างสั้น',
+                'รอบเฉลี่ย '+A.toFixed(0)+' วัน หากรูปแบบนี้เกิดขึ้นต่อเนื่องหลายรอบ ควรปรึกษาแพทย์'
+            ]);
+
+        }else if(A>35){
+
+            ins.push([
+                'w',
+                'รอบเดือนค่อนข้างยาว',
+                'รอบเฉลี่ย '+A.toFixed(0)+' วัน หากเกิดขึ้นต่อเนื่องหลายรอบ ควรปรึกษาแพทย์'
+            ]);
+
+        }else if(rng<=7){
+
+            ins.push([
+                'g',
+                'รอบเดือนค่อนข้างสม่ำเสมอ',
+                'รอบเฉลี่ย '+A.toFixed(0)+' วัน และความแตกต่างระหว่างรอบอยู่ที่ '+rng+' วัน'
+            ]);
+
+        }
+
+
+        if(rng>7){
+
+            ins.push([
+                'w',
+                'รอบเดือนมีความแปรผัน',
+                'รอบสั้นสุด '+mn+' วัน และยาวสุด '+mx+' วัน'
+            ]);
+
+        }
+
+
+        if(cl.length>=4){
+
+            const r=
+                avg(
+                    cl.slice(-3)
+                );
+
+            const p=
+                avg(
+                    cl.slice(0,-3)
+                );
+
+            const d=
+                r-p;
+
+
+            if(
+                Math.abs(d)>=3
+            ){
+
+                ins.push([
+                    'i',
+                    'แนวโน้มความยาวรอบ',
+                    '3 รอบล่าสุดเฉลี่ย '+r.toFixed(0)+' วัน เมื่อเทียบกับช่วงก่อนหน้าแตกต่างประมาณ '+Math.abs(d).toFixed(0)+' วัน'
+                ]);
+
+            }
+
+        }
+
+    }
+
+
+    if(st.length){
+
+        const since=
+            diff(
+                t,
+                st[st.length-1]
+            );
+
+        const base=
+            cl.length
+            ?Math.round(A)
+            :28;
+
+
+        if(since>90){
+
+            ins.push([
+                'w',
+                'ไม่มีประจำเดือนมานาน',
+                'ไม่มีประจำเดือนมา '+since+' วันแล้ว หากกังวลหรือมีอาการผิดปกติควรปรึกษาแพทย์'
+            ]);
+
+        }else if(
+            since>base+7
+        ){
+
+            ins.push([
+                'w',
+                'ประจำเดือนอาจมาช้ากว่าคาด',
+                'จากข้อมูลที่บันทึกไว้ รอบนี้ช้ากว่าค่าเฉลี่ยประมาณ '+(since-base)+' วัน'
+            ]);
+
+        }
+
+    }
+
+
+    if(S.period>7){
+
+        ins.push([
+            'w',
+            'ระยะมีประจำเดือนค่อนข้างนาน',
+            'ระยะล่าสุด '+S.period+' วัน หากเกิดขึ้นซ้ำหรือมีเลือดออกมาก ควรปรึกษาแพทย์'
+        ]);
+
+    }
+
+
+    const sev=
+        perL.filter(
+            d=>S.logs[d].pain>=3
+        ).length;
+
+
+    if(
+        perL.length>=2 &&
+        sev/perL.length>=.5
+    ){
+
+        ins.push([
+            'w',
+            'มีอาการปวดค่อนข้างมาก',
+            'พบ '+sev+' จาก '+perL.length+' วันที่บันทึกช่วงมีประจำเดือนว่าปวดมากหรือรุนแรง'
+        ]);
+
+    }
+
+
+    const off=
+        offL.filter(
+            d=>S.logs[d].pain>=3
+        ).length;
+
+
+    if(off>=3){
+
+        ins.push([
+            'w',
+            'ปวดท้องนอกช่วงมีประจำเดือน',
+            'พบ '+off+' วันที่มีอาการปวดมากในช่วงที่ไม่ได้มีประจำเดือน'
+        ]);
+
+    }
+
+
+    const NEG=[
+        'เศร้า',
+        'หงุดหงิด',
+        'วิตกกังวล',
+        'โมโหง่าย'
+    ];
+
+
+    let pd=0;
+    let pn=0;
+
+
+    st.forEach(s=>{
+
+        for(
+            let k=1;
+            k<=7;
+            k++
+        ){
+
+            const l=
+                S.logs[
+                    add(s,-k)
+                ];
+
+
+            if(
+                l &&
+                l.moods &&
+                l.moods.length
+            ){
+
+                pd++;
+
+
+                if(
+                    l.moods.some(
+                        m=>
+                            NEG.includes(m)
+                    )
+                ){
+
+                    pn++;
+
+                }
+
+            }
+
+        }
+
+    });
+
+
+    if(
+        pd>=3 &&
+        pn/pd>=.6
+    ){
+
+        ins.push([
+            'i',
+            'อารมณ์ก่อนมีประจำเดือน',
+            'จากข้อมูลที่บันทึก พบอารมณ์ด้านลบใน '+pn+' จาก '+pd+' วันที่อยู่ก่อนมีประจำเดือน'
+        ]);
+
+    }
+
+
+    /* -----------------------------------------------------
+       FREQUENCY
+    ----------------------------------------------------- */
+
+    const cnt=k=>{
+
+        const c={};
+
+
+        logs.forEach(d=>
+            (
+                S.logs[d][k]||[]
+            ).forEach(x=>
+                c[x]=(c[x]||0)+1
+            )
+        );
+
+
+        return Object.entries(c)
+            .sort(
+                (a,b)=>b[1]-a[1]
+            )
+            .slice(0,5);
+
+    };
+
+
+    const mo=cnt('moods');
+
+    const sy=cnt('syms');
+
+
+    const ins2=
+        sy.find(
+            x=>x[0]==='นอนไม่หลับ'
+        );
+
+
+    if(
+        ins2 &&
+        ins2[1]>=4
+    ){
+
+        ins.push([
+            'i',
+            'นอนไม่หลับที่บันทึกไว้',
+            'พบการบันทึกอาการนอนไม่หลับ '+ins2[1]+' วัน'
+        ]);
+
+    }
+
+
+    /* -----------------------------------------------------
+       FREQUENCY BAR
+    ----------------------------------------------------- */
+
+    const fb=a=>{
+
+        if(!a.length){
+
+            return `
+                <p class="mut">
+                    ยังไม่มีข้อมูล
+                </p>
+            `;
+
+        }
+
+
+        return a
+            .map(
+                ([n,v])=>
+                    `
+                    <div class="fr">
+
+                        <span>${n}</span>
+
+                        <i>
+                            <u
+                                style="
+                                    width:${
+                                        v/a[0][1]*100
+                                    }%
+                                "
+                            ></u>
+                        </i>
+
+                        <b>${v}</b>
+
+                    </div>
+                    `
+            )
+            .join('');
+
+    };
+
+
+    /* -----------------------------------------------------
+       CYCLE CHART
+    ----------------------------------------------------- */
+
+    const last=
+        cl.slice(-8);
+
+    const top=
+        Math.max(
+            40,
+            ...last
+        );
+
+
+    const cb=
+        last.length
+        ?
+        `
+            <div class="bars">
+
+                ${
+                    last
+                    .map(
+                        v=>
+                            `
+                            <div class="bc">
+
+                                <b>${v}</b>
+
+                                <i
+                                    class="${
+                                        v<21||v>35
+                                        ?'x'
+                                        :''
+                                    }"
+                                    style="
+                                        height:${
+                                            Math.round(
+                                                v/top*100
+                                            )
+                                        }px
+                                    "
+                                ></i>
+
+                            </div>
+                            `
+                    )
+                    .join('')
+                }
+
+            </div>
+
+            <p class="mut">
+                สีชมพูแสดงรอบที่อยู่นอกช่วง 21–35 วัน
+            </p>
+        `
+        :
+        `
+            <p class="mut">
+                ต้องมีอย่างน้อย 2 รอบ
+                จึงจะแสดงกราฟ
+            </p>
+        `;
+
+
+    /* -----------------------------------------------------
+       PAIN CHART
+    ----------------------------------------------------- */
+
+    let pb='';
+
+
+    for(
+        let i=13;
+        i>=0;
+        i--
+    ){
+
+        const d=
+            add(t,-i);
+
+        const l=
+            hasLog(d)
+            ?S.logs[d]
+            :null;
+
+
+        pb+=`
+
+            <div class="bc">
+
+                <i
+                    class="${
+                        l
+                        ?(
+                            l.pain>=3
+                            ?'x'
+                            :''
+                        )
+                        :'n'
+                    }"
+                    style="
+                        height:${
+                            l
+                            ?Math.round(
+                                (l.pain+.4)/
+                                4.4*
+                                90
+                            )
+                            :4
+                        }px
+                    "
+                ></i>
+
+                <em>
+                    ${parse(d).getDate()}
+                </em>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* -----------------------------------------------------
+       INSIGHTS HTML
+    ----------------------------------------------------- */
+
+    const insH=
+        ins.length
+        ?
+        ins
+        .map(
+            ([c,h,x])=>
+                `
+                <div class="ins ${c}">
+
+                    <strong>
+                        ${h}
+                    </strong>
+
+                    ${x}
+
+                </div>
+                `
+        )
+        .join('')
+        :
+        `
+            <p class="mut">
+                ยังไม่มีข้อสังเกตจากข้อมูลที่บันทึกไว้
+            </p>
+        `;
+
+
+    /* -----------------------------------------------------
+       RENDER
+    ----------------------------------------------------- */
+
+    el.innerHTML=`
+
+        <!-- SUMMARY -->
+
+        <div class="tiles">
+
+            <div class="tile">
+
+                <span>
+                    ความยาวรอบเฉลี่ย
+                </span>
+
+                <div class="num">
+                    ${
+                        cl.length
+                        ?A.toFixed(0)
+                        :'–'
+                    }
+
+                    <small>วัน</small>
+                </div>
+
+            </div>
+
+
+            <div class="tile">
+
+                <span>
+                    ความสม่ำเสมอ
+                </span>
+
+                <div class="num">
+
+                    ${
+                        cl.length
+                        ?rng
+                        :'–'
+                    }
+
+                    <small>วัน</small>
+
+                </div>
+
+            </div>
+
+
+            <div class="tile">
+
+                <span>
+                    จำนวนรอบที่บันทึก
+                </span>
+
+                <div class="num">
+
+                    ${st.length}
+
+                    <small>รอบ</small>
+
+                </div>
+
+            </div>
+
+
+            <div class="tile">
+
+                <span>
+                    วันที่มีบันทึกอาการ
+                </span>
+
+                <div class="num">
+
+                    ${logs.length}
+
+                    <small>วัน</small>
+
+                </div>
+
+            </div>
+
+
+            <div class="tile">
+
+                <span>
+                    ปวดเฉลี่ยช่วงมีประจำเดือน
+                </span>
+
+                <div class="num">
+
+                    ${
+                        perL.length
+                        ?pa(perL).toFixed(1)
+                        :'–'
+                    }
+
+                    <small>/ 4</small>
+
+                </div>
+
+            </div>
+
+
+            <div class="tile">
+
+                <span>
+                    ปวดเฉลี่ยช่วงอื่น
+                </span>
+
+                <div class="num">
+
+                    ${
+                        offL.length
+                        ?pa(offL).toFixed(1)
+                        :'–'
+                    }
+
+                    <small>/ 4</small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- HEALTH -->
+
+        <h2>
+            ข้อสังเกตด้านสุขภาพ
+        </h2>
+
+        ${insH}
+
+
+        <!-- CYCLE -->
+
+        <h2>
+            แนวโน้มรอบเดือน
+        </h2>
+
+
+        <div class="card">
+
+            <p class="h3">
+                ความยาวรอบย้อนหลัง
+                สูงสุด 8 รอบ
+            </p>
+
+            ${cb}
+
+        </div>
+
+
+        <!-- PAIN -->
+
+        <div class="card">
+
+            <p class="h3">
+                ระดับปวดท้อง
+                14 วันล่าสุด
+            </p>
+
+            <div
+                class="bars"
+                style="height:110px"
+            >
+
+                ${pb}
+
+            </div>
+
+        </div>
+
+
+        <!-- MOOD -->
+
+        <div class="card">
+
+            <p class="h3">
+                อารมณ์ที่พบบ่อย
+            </p>
+
+            ${fb(mo)}
+
+        </div>
+
+
+        <!-- SYMPTOM -->
+
+        <div class="card">
+
+            <p class="h3">
+                อาการอื่นที่พบบ่อย
+            </p>
+
+            ${fb(sy)}
+
+        </div>
+
+
+        <p class="mut">
+
+            ข้อมูลนี้เป็นเพียงข้อสังเกต
+            จากข้อมูลที่คุณบันทึกไว้
+            ไม่ใช่การวินิจฉัยโรค
+            หากมีอาการผิดปกติหรือกังวล
+            ควรพบแพทย์
+
+        </p>
+
+    `;
+
+}
+
+
+/* =======================================================
+   NAVIGATION
+======================================================= */
+
+let view='home';
+
+
+function render(){
+
+    [
+        'home',
+        'cal',
+        'stat',
+        'set'
+    ]
+    .forEach(v=>
+        $('#v-'+v)
+        .classList
+        .toggle(
+            'hide',
+            v!==view
+        )
+    );
+
+
+    document
+        .querySelectorAll('nav button')
+        .forEach(
+            b=>
+                b.classList.toggle(
+                    'on',
+                    b.dataset.v===view
+                )
+        );
+
+
+    if(view==='home'){
+
+        renderHome();
+
+    }else if(view==='cal'){
+
+        renderCal();
+
+    }else if(view==='stat'){
+
+        renderStat();
+
+    }else{
+
+        renderSet();
+
+    }
+
+}
+
+
+$('#nav').onclick=e=>{
+
+    const b=
+        e.target.closest('button');
+
+    if(b){
+
+        view=
+            b.dataset.v;
+
+        render();
+
+        scrollTo(0,0);
+
+    }
+
+};
+
+
+document.addEventListener(
+    'visibilitychange',
+    ()=>{
+
+        if(
+            document.hidden &&
+            S.pw &&
+            !$('#app')
+                .classList
+                .contains('hide')
+        ){
+
+            startLock('enter');
+
+        }
+
+    }
+);
+
+
+/* =======================================================
+   START
+======================================================= */
+
+startLock();
+
+
+if(
+    'serviceWorker' in navigator &&
+    location.protocol.startsWith('http')
+){
+
+    navigator.serviceWorker
+        .register('sw.js')
+        .catch(()=>{});
+
+}
+
+</script>
+
+</body>
+</html>
